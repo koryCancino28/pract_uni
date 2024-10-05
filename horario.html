@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario Universitario</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <h1>Horario Universitario</h1>
+    <table id="horario" class="display">
+        <thead>
+            <tr>
+                <th>Asignatura</th>
+                <th>Día</th>
+                <th>Hora</th>
+                <th>Aula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Matemáticas</td>
+                <td>Lunes</td>
+                <td>08:00 - 10:00</td>
+                <td>Aula 101</td>
+            </tr>
+            <tr>
+                <td>Física</td>
+                <td>Martes</td>
+                <td>10:00 - 12:00</td>
+                <td>Aula 102</td>
+            </tr>
+            <tr>
+                <td>Química</td>
+                <td>Miércoles</td>
+                <td>08:00 - 10:00</td>
+                <td>Aula 103</td>
+            </tr>
+            <tr>
+                <td>Programación</td>
+                <td>Jueves</td>
+                <td>10:00 - 12:00</td>
+                <td>Aula 104</td>
+            </tr>
+            <tr>
+                <td>Historia</td>
+                <td>Viernes</td>
+                <td>08:00 - 10:00</td>
+                <td>Aula 105</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#horario').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: false
+            });
+        });
+    </script>
+</body>
+</html>
