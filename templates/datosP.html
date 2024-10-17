@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario del Profesor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-control:disabled {
+            background-color: #e9ecef;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Información del Profesor</h1>
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" value="Juan Pérez" disabled>
+            </div>
+            <div class="form-group">
+                <label for="asignatura">Asignatura</label>
+                <input type="text" class="form-control" id="asignatura" value="Matemáticas" disabled>
+            </div>
+            <div class="form-group">
+                <label for="experiencia">Experiencia</label>
+                <input type="text" class="form-control" id="experiencia" value="10 años de enseñanza" disabled>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" value="juan.perez@ejemplo.com" disabled>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" value="+34 123 456 789" disabled>
+            </div>
+            <div class="form-group">
+                <label for="biografia">Biografía</label>
+                <textarea class="form-control" id="biografia" rows="3" disabled>Juan Pérez es un apasionado de la enseñanza que ha dedicado su carrera a inspirar a estudiantes en el campo de las matemáticas. Le gusta fomentar un ambiente de aprendizaje inclusivo y dinámico.</textarea>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

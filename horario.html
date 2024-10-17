@@ -3,72 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horario Universitario</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <title>Horario Semanal con DataTables</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%; /* Aumentar el ancho de la tabla */
         }
     </style>
 </head>
-
 <body>
-    <div id="header"></div>
+    <div class="container">
+        <h1 class="text-center">Horario Semanal</h1>
+        <table id="horario" class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Hora</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Sábado</th>
+                    <th>Domingo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas para cada hora -->
+                <tr><td>7:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>8:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>9:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>10:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>11:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>12:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>1:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>2:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>3:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>4:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>5:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>6:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>7:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>8:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>9:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h1>Horario Universitario</h1>
-    <table id="horario" class="display">
-        <thead>
-            <tr>
-                <th>Asignatura</th>
-                <th>Día</th>
-                <th>Hora</th>
-                <th>Aula</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Matemáticas</td>
-                <td>Lunes</td>
-                <td>08:00 - 10:00</td>
-                <td>Aula 101</td>
-            </tr>
-            <tr>
-                <td>Física</td>
-                <td>Martes</td>
-                <td>10:00 - 12:00</td>
-                <td>Aula 102</td>
-            </tr>
-            <tr>
-                <td>Química</td>
-                <td>Miércoles</td>
-                <td>08:00 - 10:00</td>
-                <td>Aula 103</td>
-            </tr>
-            <tr>
-                <td>Programación</td>
-                <td>Jueves</td>
-                <td>10:00 - 12:00</td>
-                <td>Aula 104</td>
-            </tr>
-            <tr>
-                <td>Historia</td>
-                <td>Viernes</td>
-                <td>08:00 - 10:00</td>
-                <td>Aula 105</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#horario').DataTable({
-                paging: true,
-                searching: true,
-                ordering: true,
-                info: false
+                "paging": false,  // Desactivar la paginación
+                "searching": false // Desactivar la búsqueda
             });
         });
     </script>
