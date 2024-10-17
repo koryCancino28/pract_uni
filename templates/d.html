@@ -1,0 +1,49 @@
+<ul class="opciones mb-3" style="flex:1 1 auto;">
+    <li class="menu-logo">
+        <a href="/home" class="d-flex">
+            <div class="logo-container flex-1-1-auto">
+            <img src="/assets/img/uni_gray_xs.png" alt="" class="m-0 pl-1" style="height:40px;">
+                <h4 class="flex-1-1-auto">
+                    <span class="d-block mb-1 w-100"><b>UNI UNI | EARPFIM</b></span>
+                    <span class="d-block mdl-typography--caption">PRACTICANTE</span>
+                </h4>
+            </div>
+        </a>
+    </li>
+    <ul class="menu-grupos">
+                            <li class="g1">
+                                        <a href="javascript:void(0)" class="d-flex justify-content-between grupos" data-grupo="g1">
+                <div class="d-flex"><i class="material-icons mr-2">work</i>General</div>
+                <i class="material-icons keyboard">keyboard_arrow_down</i>
+            </a>
+            <ul class="menu-modulos modulos-active" style="display:block" id="g1">
+                                                                                                                                                                                                                <li>
+                                <a href="/practicante" id="practicante_id" class=" modulos" data-toggle="tooltip" data-title="" data-original-title="" title="">
+                                    <i class="material-icons mr-2">account_box</i>Practicante
+                                    
+                                </a>
+                            </li>
+                                                                                                                                                            </ul>
+        </li>
+                        </ul>
+    <script>
+        $("[data-grupo]").on("click",function(){
+            let id= $(this).data("grupo");
+            // $(".menu-modulos").each(function(k,v){
+            //     if($(v).attr("id")!=id){
+            //         // console.log(v)
+            //         $(v).slideUp("slow");
+            //         $(v).removeClass("modulos-active");
+            //     }
+            // })
+            $("#"+id).toggleClass("modulos-active")
+            $("."+id+">a>i").toggleClass("keyboard")
+            if($("#"+id).hasClass("modulos-active")){
+                $("#"+id).slideDown("slow");
+            }else{
+                $("#"+id).slideUp("slow");
+            }
+        })
+    </script>
+<!-- verificar.txt -->
+</ul>
