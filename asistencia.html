@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Card principal -->
+    <div class="card text-center mt-5">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>Semestre</div>
+        <select class="form-select w-auto">
+          <option value="1">Semestre 1</option>
+          <option value="2">Semestre 2</option>
+        </select>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title mb-3">Presione este botón solo cuando tenga que registrar su entrada y salida de clase</h5>
+        <p class="card-text" id="horaActual">Hora: 12:24:46</p>
+
+        <button class="btn btn-success mb-3" id="btnMarcarAsistencia">Marcar mi asistencia: Entrada/Salida</button>
+
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTomaAsistencia">Tomar Asistencia Alumnos</button>
+
+        <button class="btn btn-warning mb-3">Solicitar Recuperación o Justificación</button>
+
+        <button class="btn btn-warning mb-3">NN:NN</button>
+
+        <button class="btn btn-success mb-3" id="btnReporte">Reporte</button>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Asistencias
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <!-- Tabla de Asistencias -->
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Curso</th>
+                      <th scope="col">Hora</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablaAsistencias">
+                    <!-- Aquí se agregarán las filas con los registros -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para tomar asistencia -->
+    <div class="modal fade" id="modalTomaAsistencia" tabindex="-1" aria-labelledby="modalTomaAsistenciaLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTomaAsistenciaLabel">Toma de Asistencia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="fecha" class="form-label">Día</label>
+                <input type="date" class="form-control" id="fecha">
+              </div>
+              <div class="mb-3">
+                <label for="curso" class="form-label">Curso</label>
+                <input type="text" class="form-control" id="curso">
+              </div>
+              <div class="mb-3">
+                <label for="horario" class="form-label">Horario</label>
+                <input type="time" class="form-control" id="horario">
+              </div>
+              <div class="mb-3">
+                <label for="marcacion" class="form-label">Marcación</label>
+                <select class="form-select" id="marcacion">
+                  <option value="entrada">Entrada</option>
+                  <option value="salida">Salida</option>
+                </select>
+              </div>
+
+              <!-- Botones para los estados de asistencia -->
+              <div class="mb-3">
+                <label class="form-label">Estado de Asistencia</label>
+                <div>
+                  <button type="button" class="btn btn-info" id="btnPuntual">Puntual</button>
+                  <button type="button" class="btn btn-warning" id="btnTardanza">Tardanza</button>
+                  <button type="button" class="btn btn-danger" id="btnFalta">Falta</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="btnRegistrarAsistencia">Registrar Asistencia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+      // Variable para llevar el contador del id de asistencia
+      let idAsistencia = 1;
+
+      // Variable que mantendrá el estado de asistencia
+      let estadoAsistencia = null;
+
+      // Función para asignar el estado de asistencia cuando un botón es presionado
+      const btnPuntual = document.getElementById('btnPuntual');
+      const btnTardanza = document.getElementById('btnTardanza');
+      const btnFalta = document.getElementById('btnFalta');
+
+      btnPuntual.addEventListener('click', () => {
+        setEstadoAsistencia(btnPuntual, btnTardanza, btnFalta, 'Puntual');
+      });
+
+      btnTardanza.addEventListener('click', () => {
+        setEstadoAsistencia(btnTardanza, btnPuntual, btnFalta, 'Tardanza');
+      });
+
+      btnFalta.addEventListener('click', () => {
+        setEstadoAsistencia(btnFalta, btnPuntual, btnTardanza, 'Falta');
+      });
+
+      function setEstadoAsistencia(activeBtn, btn1, btn2, estado) {
+        activeBtn.classList.add('active');
+        btn1.classList.remove('active');
+        btn2.classList.remove('active');
+        estadoAsistencia = estado;
+      }
+
+      // Función para capturar los datos y mostrar el JSON
+      document.getElementById('btnRegistrarAsistencia').addEventListener('click', function() {
+        if (estadoAsistencia === null) {
+          alert("Por favor, seleccione el estado de asistencia.");
+          return;
+        }
+
+        // Capturar los datos del formulario
+        const fecha = document.getElementById('fecha').value;
+        const curso = document.getElementById('curso').value;
+        const horario = document.getElementById('horario').value;
+        const marcacion = document.getElementById('marcacion').value;
+
+        // Obtener la hora actual del sistema
+        const horaActual = new Date().toLocaleTimeString(); // Obtiene la hora en formato hh:mm:ss
+
+        // Crear el objeto JSON con un ID único que incrementa
+        const asistencia = {
+          "id": idAsistencia++,  // Incrementa el ID
+          "codDocente": 87546374,
+          "fecha": fecha,
+          "codCurso": curso,
+          "secCurso": "A",
+          "hora": horaActual,  // Usar la hora actual del sistema
+          "horEntrada": marcacion === 'entrada' ? horaActual : null,
+          "horSalida": marcacion === 'salida' ? horaActual : null,
+          "semestre": 20242,
+          "estado": estadoAsistencia === 'Puntual' ? 1 : estadoAsistencia === 'Tardanza' ? 2 : 3
+        };
+
+        // Mostrar el objeto JSON en la consola
+        console.log(JSON.stringify(asistencia, null, 2));
+
+        // Agregar los datos de la asistencia a la tabla en el acordeón
+        const tabla = document.getElementById('tablaAsistencias');
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${asistencia.id}</td>
+          <td>${asistencia.fecha}</td>
+          <td>${asistencia.codCurso}</td>
+          <td>${asistencia.hora}</td>
+          <td>${estadoAsistencia}</td>
+          <td><button class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button></td>
+        `;
+        tabla.appendChild(fila);
+      });
+
+      // Función para eliminar una fila de la tabla
+      function eliminarFila(button) {
+        const fila = button.parentElement.parentElement;
+        fila.remove();
+      }
+
+      // Función que muestra la hora en el HTML en tiempo real
+      function actualizarHora() {
+        const hora = new Date().toLocaleTimeString();
+        document.getElementById("horaActual").textContent = "Hora: " + hora;
+      }
+
+      // Llamar a la función de actualización cada segundo para mantener la hora actualizada
+      setInterval(actualizarHora, 1000);
+    </script>
+
+  </body>
+</html>

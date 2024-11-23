@@ -3,72 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horario Semanal con DataTables</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <title>Horario de Clases</title>
     <style>
         body {
-            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        .container {
-            margin-top: 20px;
+        
+        .schedule-container {
+            overflow-x: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
-        table {
-            width: 100%; /* Aumentar el ancho de la tabla */
+        
+        .schedule-grid {
+            min-width: 1000px;
+            position: relative;
         }
+        
+        .header-row {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            gap: 0;
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .header-cell {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            box-sizing: border-box;
+            background-color: #4a90e2;
+            color: white;
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            gap: 0;
+        }
+        
+        .time-slot {
+            height: 60px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+        
+        .class-block {
+            position: absolute;
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 12px;
+            box-sizing: border-box;
+            z-index: 1;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .class-block:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        
+        .class-code {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #1976d2;
+        }
+
+        .class-name {
+            margin-bottom: 2px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .class-teacher {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .class-section {
+            font-size: 11px;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .day-column {
+            position: relative;
+        }
+
+        .time-label {
+            background-color: #f5f5f5;
+            font-weight: 500;
+            color: #333;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .button-container button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .button-container select {
+            padding: 5px;
+            font-size: 26px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center">Horario Semanal</h1>
-        <table id="horario" class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Hora</th>
-                    <th>Lunes</th>
-                    <th>Martes</th>
-                    <th>Miércoles</th>
-                    <th>Jueves</th>
-                    <th>Viernes</th>
-                    <th>Sábado</th>
-                    <th>Domingo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Filas para cada hora -->
-                <tr><td>7:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>8:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>9:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>10:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>11:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>12:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>1:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>2:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>3:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>4:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>5:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>6:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>7:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>8:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>9:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-        </table>
+    <div class="header-container">
+        <!-- Title and Download PDF button -->
+        <div class="title">Horario de Clases</div>
+        <div class="button-container">
+            <button id="downloadButton">Descargar PDF</button>
+            <select id="yearSelect">
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="schedule-container">
+        <div class="schedule-grid" id="scheduleGrid">
+            <div class="header-row">
+                <div class="header-cell">HORA</div>
+                <div class="header-cell">LUNES</div>
+                <div class="header-cell">MARTES</div>
+                <div class="header-cell">MIÉRCOLES</div>
+                <div class="header-cell">JUEVES</div>
+                <div class="header-cell">VIERNES</div>
+                <div class="header-cell">SÁBADO</div>
+                <div class="header-cell">DOMINGO</div>
+            </div>
+            <div id="timeGrid" class="time-grid">
+            </div>
+        </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#horario').DataTable({
-                "paging": false,  // Desactivar la paginación
-                "searching": false // Desactivar la búsqueda
+        const horarioData = {
+            "horarioClase": [
+                {
+                    "id": 1,
+                    "codCurso": "BIF01",
+                    "nomCurso": "Biología General",
+                    "secCurso": "A",
+                    "docente": "Dr. Juan Pérez",
+                    "teopra": "T/P",
+                    "hora": "08:00-10:00",
+                    "dia": "LU",
+                    "semestre": "1er Semestre"
+                },
+                {
+                    "id": 2,
+                    "codCurso": "MAT02",
+                    "nomCurso": "Matemáticas I",
+                    "secCurso": "B",
+                    "docente": "Ing. Laura Gómez",
+                    "teopra": "T",
+                    "hora": "10:00-12:00",
+                    "dia": "MI",
+                    "semestre": "1er Semestre"
+                },
+                {
+                    "id": 3,
+                    "codCurso": "FIS03",
+                    "nomCurso": "Física para Ingeniería",
+                    "secCurso": "C",
+                    "docente": "Dr. Pedro Sánchez",
+                    "teopra": "P",
+                    "hora": "14:00-16:00",
+                    "dia": "VI",
+                    "semestre": "2do Semestre"
+                },
+                {
+                    "id": 4,
+                    "codCurso": "INF04",
+                    "nomCurso": "Introducción a la Programación",
+                    "secCurso": "D",
+                    "docente": "Prof. María Rodríguez",
+                    "teopra": "T/P",
+                    "hora": "16:00-18:00",
+                    "dia": "JU",
+                    "semestre": "1er Semestre"
+                },
+                {
+                    "id": 5,
+                    "codCurso": "HIS05",
+                    "nomCurso": "Historia de la Ciencia",
+                    "secCurso": "A",
+                    "docente": "Lic. Andrés Flores",
+                    "teopra": "T",
+                    "hora": "08:00-10:00",
+                    "dia": "MA",
+                    "semestre": "2do Semestre"
+                }
+            ]
+        };
+
+        const diaMapping = {
+            'LU': 'LUNES',
+            'MA': 'MARTES',
+            'MI': 'MIERCOLES',
+            'JU': 'JUEVES',
+            'VI': 'VIERNES',
+            'SA': 'SABADO',
+            'DO': 'DOMINGO'
+        };
+
+        const days = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
+        const timeGrid = document.getElementById('timeGrid');
+
+        // Crear slots de tiempo y columnas para días
+        for (let hour = 7; hour <= 23; hour++) {
+            const timeSlot = document.createElement('div');
+            timeSlot.className = 'time-slot time-label';
+            timeSlot.textContent = `${hour.toString().padStart(2, '0')}:00`;
+            timeGrid.appendChild(timeSlot);
+
+            for (let i = 0; i < 7; i++) {
+                const daySlot = document.createElement('div');
+                daySlot.className = 'time-slot day-column';
+                daySlot.setAttribute('data-day', days[i]);
+                timeGrid.appendChild(daySlot);
+            }
+        }
+
+        function timeToPixels(time) {
+            const [hours, minutes] = time.split(':').map(Number);
+            return (hours - 7) * 60 + minutes;
+        }
+
+        function getColumnWidth() {
+            const dayColumn = document.querySelector('.day-column');
+            return dayColumn.offsetWidth;
+        }
+
+        window.addEventListener('load', () => {
+            const columnWidth = getColumnWidth();
+            const headerHeight = document.querySelector('.header-row').offsetHeight;
+
+            horarioData.horarioClase.forEach(clase => {
+                const classBlock = document.createElement('div');
+                classBlock.className = 'class-block';
+                
+                const diaCompleto = diaMapping[clase.dia];
+                const [horaInicio, horaFin] = clase.hora.split('-');
+                
+                const top = timeToPixels(horaInicio);
+                const height = timeToPixels(horaFin) - timeToPixels(horaInicio);
+                
+                const column = document.querySelector(`.day-column[data-day="${diaCompleto}"]`);
+                const columnRect = column.getBoundingClientRect();
+                const gridRect = timeGrid.getBoundingClientRect();
+                const leftOffset = columnRect.left - gridRect.left;
+
+                classBlock.style.top = `${top + headerHeight}px`;
+                classBlock.style.height = `${height}px`;
+                classBlock.style.width = `${columnWidth - 2}px`;
+                classBlock.style.left = `${leftOffset}px`;
+                
+                classBlock.innerHTML = `
+                    <div class="class-code">${clase.codCurso} - ${clase.teopra}</div>
+                    <div class="class-name">${clase.nomCurso}</div>
+                    <div class="class-section">
+                        <span>Sección: ${clase.secCurso}</span>
+                        <span>${clase.semestre}</span>
+                    </div>
+                    <div class="class-teacher">${clase.docente}</div>
+                `;
+                
+                document.querySelector('.schedule-grid').appendChild(classBlock);
             });
+        });
+
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.class-block').forEach(block => block.remove());
+            const event = new Event('load');
+            window.dispatchEvent(event);
         });
     </script>
 </body>
