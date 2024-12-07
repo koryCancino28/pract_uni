@@ -8,7 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   </head>
   <body>
+    
+    <!-- Agregar navbar y sidebar -->
+    <div id="navbar-container"></div>
+    <div id="header-container"></div>
 
+  
     <!-- Card principal -->
     <div class="card text-center mt-5">
       <div class="card-header d-flex justify-content-between align-items-center">
@@ -211,5 +216,38 @@
       setInterval(actualizarHora, 1000);
     </script>
 
+
+<script>
+  // Cargar el navbar desde el archivo externo
+  fetch('templates/sidebar.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el navbar');
+      }
+      return response.text();
+    })
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+    })
+    .catch(error => {
+      console.error('Error al cargar el navbar:', error);
+    });
+</script>
+<script>
+  // Cargar el navbar desde el archivo externo
+  fetch('templates/header.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el navbar');
+      }
+      return response.text();
+    })
+    .then(data => {
+      document.getElementById('header-container').innerHTML = data;
+    })
+    .catch(error => {
+      console.error('Error al cargar el navbar:', error);
+    });
+</script>
   </body>
 </html>

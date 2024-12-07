@@ -1,352 +1,155 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Demostración de Bootstrap</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-  
-  <style>
-    body{ background :#f9fbfc;}
-    .sidebar-hidden {
-      transform: translateX(-100%); /* Mueve la barra lateral fuera de la vista */
-    }
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      z-index: 1000; /* Asegura que la barra lateral esté sobre el contenido principal */
-      width: 280px;
-      transition: transform 0.3s ease; /* Transición suave para ocultar */
-    }
-    .nav-link {
-      color: white; /* Color de texto predeterminado para los enlaces de navegación */
-      text-decoration: none; /* Elimina el subrayado de los enlaces */
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-link:hover, .nav-link.active {
-      background-color: #1649f0; /* Cambia el color de fondo a azul al pasar el ratón y cuando está activo */
-      color: white; /* Asegura que el color del texto sea blanco cuando el fondo es azul */
-    }
-    .nav-link svg {
-      fill: white; /* Asegura que el color del ícono sea blanco */
-    }
-    .dropdown-menu {
-      background-color: #343a40; /* Fondo oscuro para el menú desplegable */
-    }
-    .collapse {
-      padding-left: 0; /* Quita la sangría para los submenús */
-      margin-left: 15px; /* Ajusta el margen izquierdo para alinear los submenús */
-    }
-    .content {
-      margin-left: 280px; /* Asegura que el contenido no se superponga con la barra lateral */
-      padding: 20px;
-      transition: margin-left 0.3s ease; /* Transición suave para el margen del contenido */
-    }
-    .sidebar-hidden ~ .content {
-      margin-left: 0; /* Ajusta el margen del contenido cuando la barra lateral está oculta */
-    }
-    .btn-close-sidebar {
-      position: absolute;
-      top: 10px;
-      right: -20px; /* Ajusta la posición del botón de cerrar */
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      color: white;
-      cursor: pointer;
-      z-index: 1050; /* Asegura que el botón esté sobre la barra lateral */
-    }
-    .btn-close-sidebar:hover {
-      color: #bd3232; /* Cambia ligeramente el color al pasar el ratón para visibilidad */
-    }
-    .collapse-icon {
-      transition: transform 0.3s ease; /* Rotación suave */
-    }
-    .collapse.show .collapse-icon {
-      transform: rotate(180deg); /* Rota la flecha cuando está expandido */
-    }
-    /* Estilo para centrar el texto */
-    .sidebar-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Centra el contenido horizontalmente */
-      justify-content: center; /* Centra el contenido verticalmente */
-      text-align: center; /* Alinea el texto en el centro */
-      margin-bottom: 1rem; /* Espacio debajo del encabezado */
-    }
-    .sidebar-header a {
-      display: flex;
-      align-items: center; /* Alinea verticalmente el icono y el texto */
-    }
-    .sidebar-header img {
-      margin-right: 1rem; /* Espacio entre el icono y el texto */
-    }
-  </style>
-</head>
-<body class="body">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> PLATAFORMA UNI</title>
+    <link rel="stylesheet" href="style.css">
+<!-- boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
 
-  <iframe src="templates/header.html" width="100%" height="500px" style="border:none;"></iframe>
-
-  <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-    <!-- Botón para cerrar la barra lateral -->
-    <button class="btn-close-sidebar" id="btnCloseSidebar">
-      <i class="bi bi-arrow-up-right-circle-fill icon-black"></i>
-    </button>
-    <div class="sidebar-header">
-      <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-        <img src="templates/ss.ico" alt="Icono" width="70" height="70">
-        <span class="fs-4">UNI EARPFIM</span>
-      </a>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <img src="bb.png" alt="Icono" width="60" height="70">
+      <span class="logo_name">EARPFIM UNI </span>
     </div>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseHogar" aria-expanded="false" aria-controls="collapseHogar">
-            <i class="bi bi-briefcase-fill"></i>
-          General
-          <i class="bi bi-chevron-down collapse-icon"></i> <!-- Flecha desplegable -->
-        </a>
-        <div class="collapse" id="collapseHogar">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-house-door"></i>
-                Aula virtual FIM
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="horario.html" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Mi horario de Clases 
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="templates/datosP.html" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Información Docente
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Mis Cursos Asignados
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Tutoría alumnos
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="asistencia.html" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Asistencia
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Cargar Notas ORCE
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Biblioteca Virtual
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Mi Disponibilidad
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Reclamo del reclamo docente
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Corrección de notas
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Ayuda en Aula
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                <i class="bi bi-bell-fill"></i>
-                Aula virtual Titulación
-              </a>
-            </li>
-          </ul>
+    <ul class="nav-links">
+      
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-briefcase'></i>
+            <span class="link_name" >General</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
         </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#" >General</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-graduation' ></i>Aula virtual FIM</a></li>
+          <li><a href="#" onclick="loadContent('horario.html')"><i class='bx bxs-pencil' ></i>Mi horario de Clases </a></li>
+          <li><a href="#" onclick="loadContent('datosP.html')"><i class='bx bxs-user-circle' ></i>Información Docente</a></li>          
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-school' ></i>Mis Cursos Asignados</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-book-bookmark' ></i>Tutoría alumnos</a></li>
+          <li><a href="#" onclick="loadContent('asistencia.html')"><i class='bx bxs-book-bookmark' ></i>Asistencia</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-cloud-upload' ></i>Cargar Notas ORCE</a></li>
+          <li><a href="#" onclick="loadContent()"> <i class='bx bxs-book-reader' ></i>Biblioteca Virtual</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-dashboard' ></i>Mi Disponibilidad</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-receipt' ></i> Reclamo del reclamo docente</a></li> 
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-calendar-edit' ></i>Corrección de notas</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-cog' ></i>Ayuda en Aula</a></li>
+          <li><a href="#" onclick="loadContent()"><i class='bx bxs-graduation' ></i>Aula virtual Titulación</a></li>
+        </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePanel" aria-expanded="false" aria-controls="collapsePanel">
-            <i class="bi bi-briefcase-fill"></i>
-          Administrador
-          <i class="bi bi-chevron-down collapse-icon"></i> <!-- Flecha desplegable -->
-        </a>
-        <div class="collapse" id="collapsePanel">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 1
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 2
-              </a>
-            </li>
-          </ul>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-briefcase'></i>
+            <span class="link_name">Administrador</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
         </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Administrador</a></li>
+          <li><a href="#">Web Design</a></li>
+          <li><a href="#">Login Form</a></li>
+          <li><a href="#">Card Design</a></li>
+        </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePedidos" aria-expanded="false" aria-controls="collapsePedidos">
-            <i class="bi bi-briefcase-fill"></i>
-          Acreditación FIM
-          <i class="bi bi-chevron-down collapse-icon"></i> <!-- Flecha desplegable -->
-        </a>
-        <div class="collapse" id="collapsePedidos">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 1
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 2
-              </a>
-            </li>
-          </ul>
+      
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-briefcase'></i>
+            <span class="link_name">Acreditación FIM</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
         </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Acreditación FIM</a></li>
+          <li><a href="#">UI Face</a></li>
+          <li><a href="#">Pigments</a></li>
+          <li><a href="#">Box Icons</a></li>
+        </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProductos" aria-expanded="false" aria-controls="collapseProductos">
-            <i class="bi bi-briefcase-fill"></i>
-          Virtual
-          <i class="bi bi-chevron-down collapse-icon"></i> <!-- Flecha desplegable -->
-        </a>
-        <div class="collapse" id="collapseProductos">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 1
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 2
-              </a>
-            </li>
-          </ul>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-briefcase'></i>
+            <span class="link_name">Virtual</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
         </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Virtual</a></li>
+          <li><a href="#">Web Design</a></li>
+          <li><a href="#">Login Form</a></li>
+          <li><a href="#">Card Design</a></li>
+        </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseClientes" aria-expanded="false" aria-controls="collapseClientes">
-            <i class="bi bi-briefcase-fill"></i>
-          Documentos Académicos
-          <i class="bi bi-chevron-down collapse-icon"></i> <!-- Flecha desplegable -->
-        </a>
-        <div class="collapse" id="collapseClientes">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 1
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 2
-              </a>
-            </li>
-          </ul>
+
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-briefcase'></i>
+            <span class="link_name">Documentos Académicos</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
         </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Documentos Académicos</a></li>
+          <li><a href="#"><i class='bx bx-briefcase'></i>Web Design</a></li>
+          <li><a href="#">Login Form</a></li>
+          <li><a href="#">Card Design</a></li>
+        </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseClientes" aria-expanded="false" aria-controls="collapseClientes">
-            <i class="bi bi-briefcase-fill"></i>
-          Supervisión
-          <i class="bi bi-chevron-down collapse-icon"></i> <!-- Flecha desplegable -->
-        </a>
-        <div class="collapse" id="collapseClientes">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 1
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">
-                Sub-botón 2
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li>
-        <li><a class="dropdown-item" href="#">Ajustes</a></li>
-        <li><a class="dropdown-item" href="#">Perfil</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Desconectar</a></li>
-      </ul>
+   
+      <li>
+    <div class="profile-details">
+      <div class="profile-content">
+        <img src="https://yt3.ggpht.com/a/AATXAJy_FCe7YR1nfcuxR5LeH6j0djDHWcH3ZLvBew=s900-c-k-c0xffffffff-no-rj-mo" alt="profileImg">
+      </div>
+      <div class="name-job">
+        <div class="profile_name">Kory</div>
+        <div class="job">ID: 12345678</div>
+      </div>
+      <i class='bx bx-log-out' ></i>
     </div>
+  </li>
+</ul>
   </div>
+  <!-- Contenido dentro de la pagina -->
+  <section class="home-section">
+    <div class="home-content">
+      <i class='bx bx-menu' ></i>
+      <span class="text">Estudiante</span>
+      <div class="dropdown">
+        <i class='bx bx-dots-horizontal-rounded menu-icon'></i>
+        <div class="dropdown-content">
+          <a href="login.html">Cerrar Sesión</a>
+          <a href="#">Opción 2</a>
+          <a href="#">Opción 3</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-container" id="content-container">
+      <!-- El contenido se cargará aquí -->
 
-  <div class="content">
-    <!-- Aquí va el contenido principal -->
-  </div>
+      <iframe id="scheduleFrame" src="" width="100%" height="100%" style="border: none;"></iframe>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </div>
+  </section>
+  <!-- Contenido dentro de la pagina -->
+  <script src="script.js"></script>
   <script>
-    document.getElementById('btnCloseSidebar').addEventListener('click', function() {
-      const sidebar = document.querySelector('.sidebar');
-      sidebar.classList.toggle('sidebar-hidden'); // Alterna la clase para ocultar/mostrar la barra lateral
-    });
-
-    document.querySelectorAll('.nav-link[data-bs-toggle="collapse"]').forEach(link => {
-      link.addEventListener('click', function() {
-        const targetCollapse = document.querySelector(this.getAttribute('data-bs-target'));
-        const isExpanded = targetCollapse.classList.contains('show');
-
-        // Cierra todos los submenús
-        document.querySelectorAll('.collapse.show').forEach(collapse => {
-          if (collapse !== targetCollapse) {
-            collapse.classList.remove('show');
-          }
-        });
-
-        // Alterna la visibilidad del submenú actual
-        if (isExpanded) {
-          targetCollapse.classList.remove('show');
-        } else {
-          targetCollapse.classList.add('show');
-        }
-      });
-    });
+    // Función que cambia el contenido del iframe según la opción seleccionada
+    function loadContent(file) {
+      const iframe = document.getElementById('scheduleFrame');
+      iframe.src = file;
+    }
   </script>
+
 </body>
 </html>

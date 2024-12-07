@@ -8,6 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #c2d6ec;
         }
         
         .schedule-container {
@@ -51,7 +52,9 @@
             box-sizing: border-box;
             background-color: #fff;
         }
-        
+        body::-webkit-scrollbar {
+  display: none; 
+}
         .class-block {
             position: absolute;
             background-color: #e3f2fd;
@@ -135,10 +138,14 @@
             padding: 5px;
             font-size: 26px;
         }
-
     </style>
+    
 </head>
 <body>
+
+      <!-- Contenedor para el Navbar -->
+    <div id="navbar-container"></div>
+    <div id="sidebar-container"></div>
     <div class="header-container">
         <!-- Title and Download PDF button -->
         <div class="title">Horario de Clases</div>
@@ -312,5 +319,6 @@
             window.dispatchEvent(event);
         });
     </script>
+    
 </body>
 </html>
