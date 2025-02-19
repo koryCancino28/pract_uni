@@ -6,273 +6,554 @@
   <title>Formulario de Datos del Docente</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    .section { display: none; }
-    .section.active { display: block; }
-    .modal-body input, .modal-body select { width: 100%; }
-    /* Estilo para el contenedor de la foto */
-    .foto-container {
-      position: relative;
-      width: 100px; /* Tamaño del círculo */
-      height: 100px; /* Tamaño del círculo */
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid #ccc;
-    }
-    /* Estilo para la foto dentro del círculo */
-    #fotoDocente {
-      width: 100%; /* Ocupa todo el espacio del contenedor */
-      height: 100%;
-      object-fit: cover;
-    }
-    /* Estilo para el botón dentro del círculo */
-    .btn-upload {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      background-color: rgba(0, 123, 255, 0.7);
-      color: white;
-      border-radius: 50%;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    .btn-upload:hover {
-      background-color: rgba(0, 123, 255, 1);
-    }
-    input[type="file"] {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="Formulario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
-  <!-- Agregar navbar y sidebar -->
-  <div id="navbar-container"></div>
-  <div id="header-container"></div>
+  <div class="CONTMAIN">
+    <form action="#" method="POST" class="datos-personales">
 
-
-<!-- Card Principal -->
-<div class="container mt-5">
-  <div class="card">
-    <div class="card-header">
-      <h5>Formulario de Datos del Docente</h5>
-    </div>
-    <div class="card-body">
-      <!-- Foto y Datos del Docente -->
-      <div class="d-flex align-items-center mb-4">
-        <!-- Contenedor de la foto -->
-        <div class="foto-container">
-          <img src="https://via.placeholder.com/100" alt="Foto Docente" class="rounded-circle" id="fotoDocente">
-          <!-- Botón para subir foto -->
-          <input type="file" id="inputFoto" accept="image/*" onchange="previewFoto()">
-          <button class="btn-upload" onclick="document.getElementById('inputFoto').click();">
-            <i class="bi bi-camera"></i>
-          </button>
+      <div class="perfil-container">
+        <div class="foto-preview" id="fotoPreview">
+          <span>Subir Foto</span>
         </div>
-        <div class="ms-3">
-          <h6 id="nombreDocente">Nombre: Juan Pérez</h6>
-          <p id="codigoDocente">Código: 123456789</p>
+
+        <div class="info-personal">
+          <h2 id="MostrarNombre">Nombre</h2>
+          <p id="MostrarDNI">DNI</p>
+
+          <div class="acciones">
+            <button class="btn-accion" id="actualizarBtn"><i class="fa-solid fa-rotate"></i>Actualizar</button>
+            <button class="btn-accion"><i class="fas fa-history"></i> Historial</button>
+          </div>
+        </div>
+
+        <input type="file" id="archivo" name="archivo" accept="image/*" hidden>
+
+        <div class="inputs-ocultos" id="inputsOcultos">
+          <input type="text" id="OcultarNombre" name="OcultarNombre" placeholder="Ingrese su nombre">
+          <input type="text" id="OcultarDNI" name="OcultarDNI" placeholder="Ingrese su DNI" maxlength="8">
+          <button id="guardarDatos">Guardar</button>
         </div>
       </div>
 
-      <!-- Navegación de secciones -->
-      <ul class="nav nav-pills mb-3">
-        <li class="nav-item">
-          <a class="nav-link " id="navDatosPersonales" href="#">1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " id="navEstadoCivil" href="#">2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" id="navDomicilio" href="#">3</a>
-        </li>
-      </ul>
+      <div class="botones">
+        <button class="boton" id="Botonpdf">Generar PDF</button>
+      </div>
 
-      <!-- Secciones del Formulario -->
-      <div class="section active" id="sectionDatosPersonales">
-        <h6>Datos Personales</h6>
-        <form>
-          <div class="mb-3">
-            <label for="sexo" class="form-label">Sexo</label>
-            <select class="form-select" id="sexo">
-              <option>Masculino</option>
-              <option>Femenino</option>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-1-tab" data-toggle="tab" data-target="#nav-1" type="button" role="tab"
+            aria-controls="nav-1" aria-selected="true">1er</button>
+          <button class="nav-link" id="nav-2-tab" data-toggle="tab" data-target="#nav-2" type="button" role="tab"
+            aria-controls="nav-2" aria-selected="false">2do</button>
+          <button class="nav-link" id="nav-3-tab" data-toggle="tab" data-target="#nav-3" type="button" role="tab"
+            aria-controls="nav-3" aria-selected="false">3er</button>
+          <button class="nav-link" id="nav-4-tab" data-toggle="tab" data-target="#nav-4" type="button" role="tab"
+            aria-controls="nav-4" aria-selected="false">4to</button>
+        </div>
+      </nav>
+
+      <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab">
+        <h2>Datos Personales</h2>
+
+        <div class="DatosForm">
+
+          <div class="FORMSEXO">
+            <label for="sexo">Sexo:</label>
+            <select id="Sexo" name="sexo">
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="otro">Otro</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfonos</label>
-            <input type="text" class="form-control" id="telefono" placeholder="5316292 | 5456454 | 5310303">
-          </div>
-          <div class="mb-3">
-            <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-            <input type="date" class="form-control" id="fechaNacimiento" value="1975-02-16">
-          </div>
-          <div class="mb-3">
-            <label for="dni" class="form-label">DNI</label>
-            <input type="text" class="form-control" id="dni" value="08161078">
-          </div>
-          <div class="mb-3">
-            <label for="celular" class="form-label">Celular</label>
-            <input type="text" class="form-control" id="celular" placeholder="951629294 | 999662562">
-          </div>
-        </form>
-      </div>
 
-      <div class="section" id="sectionEstadoCivil">
-        <h6>Estado Civil</h6>
-        <form>
-          <div class="mb-3">
-            <label for="estadoCivil" class="form-label">Estado Civil</label>
-            <select class="form-select" id="estadoCivil">
-              <option>Soltero</option>
-              <option>Casado</option>
-              <option>Divorciado</option>
+          <div class="GRUPOFORM">
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input type="text" id="FechaNacimiento" name="fechaNacimiento">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="DNI">DNI:</label>
+            <input type="text" id="DNI" name="ID" maxlength="8">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="TelefonoFijo">Teléfono Fijo:</label>
+            <input type="tel" id="TelefonoFijo" name="telefono_fijo">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="Celular">Celular:</label>
+            <input type="tel" id="Celular" name="celular">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="RUC">RUC:</label>
+            <input type="text" id="RUC" name="ruc">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="lib_militar">Libreta Militar:</label>
+            <input type="text" id="lib_militar" name="lib_militar">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="brevete">Brevete:</label>
+            <input type="text" id="brevete" name="brevete">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="categoria_brevete">Categoría del Brevete:</label>
+            <input type="text" id="categoria_brevete" name="categoria_brevete">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="vehiculo">Si cuenta con vehículo indicar características</label>
+            <input type="text" id="vehiculo" name="vehiculo">
+          </div>
+
+          <div class="ESTADOCI">
+            <label for="estado_civil">Estado Civil:</label>
+            <select id="estado_civil" name="estado_civil">
+              <option value="soltero">Soltero</option>
+              <option value="casado">Casado</option>
+              <option value="divorciado">Divorciado</option>
+              <option value="viudo">Viudo</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="fechaMatrimonio" class="form-label">Fecha Matrimonio</label>
-            <input type="date" class="form-control" id="fechaMatrimonio" value="2005-04-01">
+
+          <div class="GRUPOFORM">
+            <label for="fecha_matrimonio">Fecha de Matrimonio:</label>
+            <input type="date" id="fecha_matrimonio" name="fecha_matrimonio">
           </div>
-        </form>
+
+
+          <div class="GRUPOFORM">
+            <label for="GrupoSanguineo">Grupo Sanguíneo:</label>
+            <input type="text" id="GrupoSanguineo" name="grupo_sanguineo">
+          </div>
+
+          <div class="GRUPOFORM">
+            <label for="email">Email(s):</label>
+            <input type="email" id="Email" name="email" multiple>
+          </div>
+          <br>
+
+          <div class="LNacimiento">
+            <h2>Lugar de Nacimiento</h2>
+
+            <div class="GRUPOFORM">
+              <label for="pais">País:</label>
+              <input type="text" id="PaisN" name="pais">
+            </div>
+
+            <div class="GRUPOFORM">
+              <label for="departamento">Departamento:</label>
+              <input type="text" id="DepartamentoN" name="departamento">
+            </div>
+
+            <div class="GRUPOFORM">
+              <label for="provincia">Provincia:</label>
+              <input type="text" id="ProvinciaN" name="provincia">
+            </div>
+
+            <div class="GRUPOFORM">
+              <label for="distrito">Distrito:</label>
+              <input type="text" id="DistritoN" name="distrito">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- MODAL PARA VENTANA EMERGENTE-->
+        <div class="Domicilio">
+          <h2>DOMICILIO</h2>
+
+          <div id="miModal" class="modal">
+            <div class="modal-contenido">
+              <h2>Agregar Domicilio</h2>
+
+              <div class="grid-container">
+                <div class="CampoPais">
+                  <label for="Pais">País:</label>
+                  <select name="Pais" id="Pais">
+                    <option value="-">-</option>
+                    <option value="Perú">Perú</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Brazil">Brazil</option>
+                  </select>
+                </div>
+
+                <div class="CampoDepartamento">
+                  <label for="Departamento">Departamento:</label>
+                  <select name="Departamento" id="Departamento">
+                    <option value="-">-</option>
+                    <option value="Amazonas">Amazonas</option>
+                    <option value="Ancash">Ancash</option>
+                    <option value="Apurímac">Apurímac</option>
+                    <option value="Arequipa">Arequipa</option>
+                    <option value="Ayacucho">Ayacucho</option>
+                    <option value="Lima">Lima</option>
+                  </select>
+                </div>
+
+                <div class="CampoProvincia">
+                  <label for="Provincia">Provincia:</label>
+                  <select name="Provincia" id="Provincia">
+                    <option value="-">-</option>
+                    <option value="Barranca">Barranca</option>
+                    <option value="Cajatambo">Cajatambo</option>
+                    <option value="Canta">Canta</option>
+                    <option value="Huaral">Huaral</option>
+                    <option value="Huarochirí">Huarochirí</option>
+                    <option value="Callao">Callao</option>
+                  </select>
+                </div>
+
+                <div class="CampoDistrito">
+                  <label for="Distrito">Distrito:</label>
+                  <select name="Distrito" id="Distrito">
+                    <option value="-">-</option>
+                    <option value="Ancón">Ancón</option>
+                    <option value="Carabayllo">Carabayllo</option>
+                    <option value="Comas">Comas</option>
+                    <option value="Independencia">Independencia</option>
+                    <option value="Los Olivos">Los Olivos</option>
+                    <option value="Santa Rosa">Santa Rosa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="LineasTexto">
+                <div class="campo1">
+                  <label for="TipoVia">Tipo de Vía:</label>
+                  <input type="text" id="TipoVia" name="TipoVia">
+                </div>
+
+                <div class="campo2">
+                  <label for="NombreVia">Nombre de la Vía:</label>
+                  <input type="text" id="NombreVia" name="NombreVia">
+                </div>
+
+                <div class="campo1">
+                  <label for="Tipo">Tipo:</label>
+                  <input type="text" id="Tipo" name="Tipo">
+                </div>
+
+                <div class="campo2">
+                  <label for="NumeroInmueble">Número de Inmueble:</label>
+                  <input type="text" id="NumeroInmueble" name="NumeroInmueble">
+                </div>
+
+                <div class="campo1">
+                  <label for="TipoZona">Tipo de Zona:</label>
+                  <input type="text" id="TipoZona" name="TipoZona">
+                </div>
+
+                <div class="campo2">
+                  <label for="NombreZona">Nombre de la Zona:</label>
+                  <input type="text" id="NombreZona" name="NombreZona">
+                </div>
+              </div>
+
+              <button class="GuardarInfo">GUARDAR</button>
+              <button class="CancelarInfo">CANCELAR</button>
+            </div>
+            
+          </div>
+
+          <div class="tabla-contenedor">
+            <table id="DOM" class="DOM">
+              <thead>
+                <tr>
+                  <th>Orden</th>
+                  <th>Pais</th>
+                  <th>Departamento</th>
+                  <th>Provincia</th>
+                  <th>Distrito</th>
+                  <th>Tipo de Via</th>
+                  <th>Nombre de la Via</th>
+                  <th>Tipo</th>
+                  <th>Numero de Inmueble</th>
+                  <th>Tipo Zona</th>
+                  <th>Nombre de la Zona</th>
+                  <th>Accion</th>
+                </tr>
+              </thead>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+
+          </div>
+          <button class="AbrirModal">AÑADIR REGISTRO</button>
+        </div>
+
+        <!-- MODAL PARA VENTANA EMERGENTE DE FAMILIAR-->
+        <div class="AgregarFamiliar">
+          <h2>Familiares</h2>
+
+          
+
+          <div id="miModalF" class="modalF">
+            <div class="modal-familiar">
+
+              <h2>Agregar Familiar</h2>
+              <div class="ContenedoR">
+                <div class="CampoSinBordes">
+                  <label for="nombres">Apellidos y Nombres</label>
+                  <input type="text" id="nombres" name="nombres"><br>
+                </div>
+
+                <div class="CampoParentesco">
+                  <label for="parentesco">Parentesco</label>
+                  <select name="parentesco" id="parentesco">
+                    <option value="Seleccionar">Seleccionar</option>
+                    <option value="Padre">Padre</option>
+                    <option value="Hermano">Hermano</option>
+                    <option value="Cuñado">Cuñado</option>
+                    <option value="Tio">Tio</option>
+                    <option value="Sobrino">Sobrino</option>
+                  </select>
+                </div>
+
+                <div class="CampoSinBordes">
+                  <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                  <input type="date" id="fechaNacimiento" name="fechaNacimiento"><br>
+                </div>
+
+                <div class="CampoEstadoCivil">
+                  <label for="estadoCivil">Estado Civil</label>
+                  <select name="estadoCivil" id="estadoCivil">
+                    <option value="Seleccionar">Seleccionar</option>
+                    <option value="Soltero">Soltero</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Viudo">Viudo</option>
+                    <option value="Divorciado">Divorciado</option>
+                  </select>
+                </div>
+
+                <div class="CampoEstudios">
+                  <label for="nivelEstudios">Nivel de Estudios</label>
+                  <select name="nivelEstudios" id="nivelEstudios">
+                    <option value="Seleccionar">Seleccionar</option>
+                    <option value="Primaria Completa">Primaria Completa</option>
+                    <option value="Secundaria Completa">Secundaria Completa</option>
+                    <option value="Superior Tecnico">Superior Tecnico</option>
+                    <option value="Bachillerato">Bachillerato</option>
+                  </select>
+                </div>
+
+                <div class="CampoSinBordes">
+                  <label for="ocupacion">Ocupacion</label>
+                  <input type="text" id="ocupacion" name="ocupacion">
+                </div>
+
+                <div class="opciones-Enlinea">
+                  <label>¿Depende económicamente de Ud.?</label>
+                  <input type="radio" id="dependeSi" name="dependencia" value="si">
+                  <label for="dependeSi">Sí</label>
+                  <input type="radio" id="dependeNo" name="dependencia" value="no">
+                  <label for="dependeNo">No</label>
+                </div>
+                <br>
+
+                <div>
+                  <button class="GuardarInfoFamiliar">GUARDAR</button>
+                  <button class="CerrarModalFamiliar">CANCELAR</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="tabla-contenedor">
+
+            <table class="TablaFamiliar">
+              <thead>
+                <th>Orden</th>
+                <th>Apellidos y Nombres</th>
+                <th>Parentesco</th>
+                <th>Fecha Nacimiento</th>
+                <th>Est. Civil</th>
+                <th>Nivel Estudios</th>
+                <th>Ocupacion</th>
+                <th>¿Depende de usted?</th>
+                <th>Accion</th>
+              </thead>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <button class="AbrirModalFamiliar">Agregar Familiar</button>
       </div>
 
-      <div class="section" id="sectionDomicilio">
-        <h6>Dirección</h6>
-        <table class="table table-bordered mb-3">
-          <thead>
-            <tr>
-              <th>Pais</th>
-              <th>Provincia</th>
-              <th>Tipo de Vía</th>
-              <th>Nombre de la Vía</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tablaDomicilios">
-            <!-- Se agregarán los domicilios aquí -->
-          </tbody>
-        </table>
-        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalAgregarDomicilio">Agregar Domicilio</button>
+      <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab"> </div>
+
+      <div class="CasoEmergencia">
+        <h2>1.1.- PERSONAS A COMUNICAR EN CASO DE EMERGENCIA:</h2>
+        <div class="Contacto">
+          <h3>Contacto 1 (*)</h3>
+
+          <div class="AP">
+            <label for="AP">Apellidos y Nombres</label>
+            <input type="text" id="nombre1" name="nombre1">
+          </div>
+
+          <div class="PAREN">
+            <label for="PAREN">Parentesco</label>
+            <input type="text" id="parentesco1" name="parentesco1">
+          </div>
+          <div class="CEL">
+            <label for="CEL">Celular</label>
+            <input type="text" id="celular1" name="celular1">
+          </div>
+        </div>
+
+        <div class="Contacto">
+          <h3>Contacto 2 (*)</h3>
+
+          <div class="AP">
+            <label for="AP">Apellidos y Nombres</label>
+            <input type="text" id="nombre2" name="nombre2">
+          </div>
+
+          <div class="PAREN">
+            <label for="PAREN">Parentesco</label>
+            <input type="text" id="parentesco2" name="parentesco2">
+          </div>
+
+          <div class="CEL">
+            <label for="CEL">Celular</label>
+            <input type="text" id="celular2" name="celular2">
+          </div>
+        </div>
+
+        <div class="Contacto">
+          <h3>Contacto 3</h3>
+
+          <div class="AP">
+            <label for="AP">Apellidos y Nombres</label>
+            <input type="text" id="nombre3" name="nombre3">
+          </div>
+
+          <div class="PAREN">
+            <label for="PAREN">Parentesco</label>
+            <input type="text" id="parentesco3" name="parentesco3">
+          </div>
+
+          <div class="CEL">
+            <label for="CEL">Celular</label>
+            <input type="text" id="celular3" name="celular3">
+          </div>
+
+        </div>
       </div>
-    </div>
+      <div class="DatosLaborales">
+        <h2>DATOS LABORALES</h2>
+
+        <div class="CAMBOR">
+          <label for="Condicion">Condición (C/N)</label>
+          <input type="text" id="Condicion" name="Condicion">
+
+          <label for="Categoría">Categoría</label>
+          <input type="text" id="Categoría" name="Categoría">
+
+          <label for="Dedicación">Dedicación</label>
+          <input type="text" id="Dedicación" name="Dedicación">
+
+          <label for="Horas">Horas</label>
+          <input type="text" id="Horas" name="Horas">
+
+          <label for="HorasLectivas">HorasLectivas</label>
+          <input type="text" id="HorasLectivas" name="HorasLectivas">
+
+        </div>
+
+        <div class="CAMPSIN">
+          <label for="DependenciaLaboral">Dependencia donde labora(Actual)</label>
+          <input type="text" name="DependenciaLaboral" id="DependenciaLaboral">
+
+          <label for="FechaIngreso">Fecha Ingreso FIM</label>
+          <input type="date" name="FechaIngreso" id="FechaIngreso">
+
+          <label for="FechaNombramiento">Fecha.Nombramiento</label>
+          <input type="date" name="FechaNombramiento" id="FechaNombramiento">
+        </div>
+
+        <div class="CAMBOR">
+          <label for="RegímenPensionario">Regimen Pensionario</label>
+          <input type="text" name="RegímenPensionario" id="RegímenPensionario">
+        </div>
+
+        <div class="CAMPSIN">
+          <label for="AFP">AFP Nombre</label>
+          <input type="text" name="AFP" id="AFP">
+
+          <label for="CodAFP">Cód AFP</label>
+          <input type="text" name="CodAFP" id="CodAFP">
+
+          <label for="CódSalud">Cód. EsSalud</label>
+          <input type="text" name="CódSalud" id="CódSalud">
+
+          <label for="TipoSeguro">Otro Tipo de Seguro</label>
+          <input type="text" name="TipoSeguro" id="TipoSeguro">
+        </div>
+      </div>
+
+    </form>
   </div>
-</div>
 
-<!-- Modal para agregar domicilio -->
-<div class="modal fade" id="modalAgregarDomicilio" tabindex="-1" aria-labelledby="modalAgregarDomicilioLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAgregarDomicilioLabel">Agregar Domicilio</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formDomicilio">
-          <div class="mb-3">
-            <label for="pais" class="form-label">Pais</label>
-            <select class="form-select" id="pais">
-              <option>Perú</option>
-              <option>Chile</option>
-              <option>Argentina</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="provincia" class="form-label">Provincia</label>
-            <select class="form-select" id="provincia">
-              <option>Áncash</option>
-              <option>Lima</option>
-              <option>Cuzco</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="tipoVia" class="form-label">Tipo de Vía</label>
-            <select class="form-select" id="tipoVia">
-              <option>Calle</option>
-              <option>Avenida</option>
-              <option>Jr.</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="nombreVia" class="form-label">Nombre de la Vía</label>
-            <input type="text" class="form-control" id="nombreVia">
-          </div>
-          <div class="mb-3">
-            <label for="numeroInmueble" class="form-label">Número de Inmueble</label>
-            <input type="text" class="form-control" id="numeroInmueble">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrar">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="btnRegistrarDomicilio">Registrar Domicilio</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Script -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Función para previsualizar la foto cargada
-  function previewFoto() {
-    const inputFoto = document.getElementById('inputFoto');
-    const file = inputFoto.files[0];
-    const reader = new FileReader();
+  <script src="ModalFormulario.js"></script>
+  <script>
 
-    reader.onload = function(e) {
-      document.getElementById('fotoDocente').src = e.target.result;
+    function toggleMenu() {
+      document.body.classList.toggle("menu-closed");
     }
 
-    if (file) {
-      reader.readAsDataURL(file);
+    function toggleSubmenu(event) {
+      event.preventDefault();
+      const submenu = event.target.nextElementSibling;
+      if (submenu && submenu.classList.contains('submenu')) {
+        submenu.classList.toggle('open');
+        const toggler = event.target.querySelector('.submenu-toggler');
+        toggler.classList.toggle('fa-chevron-up');
+        toggler.classList.toggle('fa-chevron-down');
+      }
     }
-  }
 
-  // Funcionalidad para la navegación de secciones
-  document.getElementById("navDatosPersonales").addEventListener("click", function() {
-    setActiveSection("sectionDatosPersonales");
-  });
-  document.getElementById("navEstadoCivil").addEventListener("click", function() {
-    setActiveSection("sectionEstadoCivil");
-  });
-  document.getElementById("navDomicilio").addEventListener("click", function() {
-    setActiveSection("sectionDomicilio");
-  });
-
-  function setActiveSection(sectionId) {
-    const sections = document.querySelectorAll(".section");
-    sections.forEach(function(section) {
-      section.classList.remove("active");
-    });
-    document.getElementById(sectionId).classList.add("active");
-  }
-
-  // Agregar domicilio a la tabla
-  document.getElementById("btnRegistrarDomicilio").addEventListener("click", function() {
-    const pais = document.getElementById("pais").value;
-    const provincia = document.getElementById("provincia").value;
-    const tipoVia = document.getElementById("tipoVia").value;
-    const nombreVia = document.getElementById("nombreVia").value;
-    const numeroInmueble = document.getElementById("numeroInmueble").value;
-
-    const tablaDomicilios = document.getElementById("tablaDomicilios");
-    const nuevaFila = document.createElement("tr");
-
-    nuevaFila.innerHTML = `
-      <td>${pais}</td>
-      <td>${provincia}</td>
-      <td>${tipoVia}</td>
-      <td>${nombreVia}</td>
-      <td><button class="btn btn-danger btn-sm">Eliminar</button></td>
-    `;
-
-    tablaDomicilios.appendChild(nuevaFila);
-    const modal = new bootstrap.Modal(document.getElementById("modalAgregarDomicilio"));
-    modal.hide();
-  });
-</script>
-
+  </script>
+  <!-- Incluir Bootstrap JS y dependencias desde un CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
   // Cargar el navbar desde el archivo externo
   fetch('sidebar.html')

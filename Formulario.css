@@ -1,0 +1,415 @@
+.AP, .PAREN, .CEL {
+    color: #5f97d8;
+}
+
+/** Estilos generales **/
+#Botonpdf {
+    border-color: red !important;
+    width: 9%;
+    color: red !important;
+    height: 30px;
+    border-radius: 6px;
+}
+
+#BotonRefresh {
+    width: 9%;
+    height: 30px;
+    border-color: rgb(72, 203, 226);
+    border-radius: 6px;
+    color: rgb(75, 197, 197);
+}
+
+#Boton1 {
+    width: 2.5%;
+    height: 30px;
+    border-color: rgb(72, 203, 226);
+    border-radius: 6px;
+    color: rgb(75, 197, 197);
+}
+
+/* Estilos para la estructura principal */
+.CONTMAIN {
+    padding-left: 100px; 
+    transition: padding-left 1.0s; 
+    padding-top: 100px;
+    background-color: #a2c5ec;
+    flex: 1; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column;
+}
+
+.menu-closed .CONTMAIN {
+    padding-left: 0px; 
+}
+
+/* Estilos para los títulos */
+.tab-pane h2 {
+    color: #5f97d8 !important; /* Color azul */
+}
+
+.DatosLaborales h2, .CasoEmergencia h2, .Contacto h3 {
+    color: #5f97d8;
+}
+
+/* Formulario de datos personales */
+.datos-personales {
+    width: 60%;
+    padding: 20px;
+    background-color: #e6ebf0;
+    border: 1px solid #a2c5ec;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: 1.0s;
+}
+
+.DatosForm {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    color: #5f97d8;
+    font-size: 21px;
+}
+
+.LNacimiento {
+    grid-column: span 3; /*  3 COLUMAS */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.LNacimiento h2 {
+    color: #5f97d8;
+    font-size: 35px;
+    grid-column: span 2; /*  2 COLUMAS DEL TITULO */
+}
+
+.PrimeraInfo h2 {
+    color: #5f97d8;
+    font-size: 35px; 
+}
+
+.Domicilio h2, .AgregarFamiliar h2 {
+    color: #5f97d8;
+    font-size: 35px;
+}
+
+/* Estilo para los botones */
+.Domicilio button, .TablaFamiliar button {
+    background-color: #5f97d8;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.Domicilio button:hover {
+    background-color: #a2c5ec;
+}
+
+.Domicilio button:active {
+    background-color: #5e8dc4;
+}
+
+/* Modal y contenedores */
+.modal, .modalF {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-contenido, .modal-familiar {
+    background-color: #fff;
+    margin: auto;
+    padding: 25px;
+    border: 1px solid #888;
+    width: 950px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-familiar label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Formulario de grupo y otros */
+.GRUPOFORM {
+    display: flex;
+    flex-direction: column;
+}
+
+.GRUPOFORM, .ESTADOCI, .FORMSEXO{
+    display: flex;
+    flex-direction: column; 
+    margin-top: 20px; 
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.ESTADOCI select, .CampoPais select, .CampoDepartamento select, .CampoProvincia select,
+.CampoDistrito select, .CampoParentesco select, .CampoEstadoCivil select, .CampoEstudios select {
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.FORMSEXO select {
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.LNacimiento label {
+    display: block;
+    margin-top: 15px;
+}
+
+/* Estilo de la tabla */
+.DOM, .TablaFamiliar {
+    width: 100%;
+    border-collapse: collapse;
+    border-left: 1px solid #ccc; 
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    margin-top: 20px;
+}
+
+.DOM th, .TablaFamiliar th {
+    border: 2px solid #c3c0c0; 
+    padding: 25px;
+    text-align: left;
+    color: #5f97d8; /* Asegura que las cabeceras tengan el color deseado */
+}
+
+.DOM td, .TablaFamiliar td {
+    padding: 30px;
+    text-align: left;
+    border: 2px solid #c3c0c0; 
+    color: #5f97d8; /* Aplica el color a las celdas */
+}
+
+/* Perfil de usuario */
+.perfil-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.foto-preview {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.foto-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-personal {
+    flex: 1;
+}
+
+.info-personal h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.info-personal p {
+    margin: 5px 0;
+    color: rgb(53, 112, 201);
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-accion {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-accion:hover {
+    background-color: #f0f0f0;
+}
+
+.inputs-ocultos {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.botones {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Modal domicilio */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.LineasTexto {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr; 
+    gap: 10px; 
+    max-width: 70%; 
+}
+
+.ContenedoR {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.campo2 input, .CampoSinBordes input, .AP input, .PAREN input, .CEL input, .CAMPSIN input {
+    border: none;
+    border-bottom: 1px solid #ccc;  
+    background-color: transparent;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 16px;
+    outline: none;
+    transition: border-bottom 0.3s ease;
+}
+
+.campo1 {
+    grid-column: span 1; 
+}
+
+.LineasTexto div {
+    display: flex;
+    flex-direction: column;
+}
+
+.opciones-Enlinea {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 5px; 
+    white-space: nowrap; 
+}
+
+.opciones-Enlinea label {
+    margin: 0; 
+}
+
+.opciones-Enlinea input[type="radio"] {
+    margin: 0 2px; 
+    vertical-align: middle; 
+}
+
+/* Botones dentro de modales */
+.AbrirModalFamiliar, .GuardarInfoFamiliar, .CerrarModalFamiliar {
+    background-color: #5f97d8;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.CasoEmergencia {
+    margin-top: 50px;
+}
+
+.Contacto {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr; 
+    gap: 55px;
+    align-items: center; 
+    background-color: #f9f9f9; 
+    padding: 15px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.CasoEmergencia h2 {
+    color: #5f97d8;
+}
+
+.Contacto h3 {
+    color: #5f97d8; 
+    grid-column: span 3; 
+    font-size: 30px;
+}
+
+/* Estilo para formularios de contacto */
+.CampoContacto {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.CampoContacto input {
+    padding: 12px; 
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.CampoContacto select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.CAMBOR label, .CAMPSIN label {
+    color: #5f97d8; /* Azul */
+}
+
+.CAMBOR input, .CAMPSIN input {
+    border-bottom: 1px solid #5f97d8; /* Azul para el borde de los inputs */
+    color: #5f97d8; /* Azul para el texto dentro de los inputs */
+}
+
+/* Si deseas que los campos de entrada tengan un color de fondo diferente cuando se enfoca (focus) */
+.CAMBOR input:focus, .CAMPSIN input:focus {
+    border-color: #5f97d8; /* Cambia el borde a azul cuando el campo esté enfocado */
+    outline: none; /* Elimina el borde por defecto de focus */
+}
